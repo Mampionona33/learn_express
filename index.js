@@ -5,8 +5,8 @@ const fs = require("fs");
 const myText = fs.readFileSync("./txt/input.txt", "utf-8");
 console.log(myText);
 
-
+// create the output file
 const txtOut = `this is the output text : ${myText}. \n Created onn ${Date.now()}`;
-// write file 
+// write file
 fs.writeFileSync("./txt/output.txt", txtOut);
-console.log('File writen');
+console.log("File writen");
