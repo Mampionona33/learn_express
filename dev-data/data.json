@@ -1,0 +1,6 @@
+[
+  { "id": 0, "productName": "tomato", "from": "Madagascar" },
+  { "id": 1, "productName": "banana", "from": "Madagascar" },
+  { "id": 2, "productName": "potato", "from": "Madagascar" },
+  { "id": 3, "productName": "anana", "from": "Madagascar" }
+]

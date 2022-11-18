@@ -1,2 +1,0 @@
-this is my text 
- This is the output file
