@@ -1,20 +1,19 @@
 // inport module with require
-const fs = require("fs");
+const http = require("http");
 
-/* 
-    - in generaly, the first param of calback funciton is the error
-    - using non block function 
-*/
-fs.readFile("./txt/input.txt", "utf-8", (err, data) => {
-  if (err) return console.log(`error : ${err.message}`);
-
-  console.log(data);
-  fs.writeFile(
-    "./txt/output.txt",
-    `${data} \n This is the output file`,
-    "utf-8",
-    (err) => {
-      console.log("The file has been  writen");
-    }
-  );
+// create server using createServer methode
+// and past a response for all request
+const server = http.createServer((req, res) => {
+  // sending back a simple respon from request
+  console.log(req);
+  res.end(`Hello from the server`);
 });
+
+const PORT = 8000;
+
+// listen to the port
+server.listen(PORT, "127.0.0.1", () => {
+  console.log(`server start on port ${PORT}`);
+});
+
+// finaly run the command node index.js
