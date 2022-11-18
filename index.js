@@ -1,12 +1,20 @@
 // inport module with require
 const fs = require("fs");
 
-// using the fs module to read file
-const myText = fs.readFileSync("./txt/input.txt", "utf-8");
-console.log(myText);
+/* 
+    - in generaly, the first param of calback funciton is the error
+    - using non block function 
+*/
+fs.readFile("./txt/input.txt", "utf-8", (err, data) => {
+  if (err) return console.log(`error : ${err.message}`);
 
-// create the output file
-const txtOut = `this is the output text : ${myText}. \n Created onn ${Date.now()}`;
-// write file
-fs.writeFileSync("./txt/output.txt", txtOut);
-console.log("File writen");
+  console.log(data);
+  fs.writeFile(
+    "./txt/output.txt",
+    `${data} \n This is the output file`,
+    "utf-8",
+    (err) => {
+      console.log("The file has been  writen");
+    }
+  );
+});
