@@ -3,27 +3,56 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 
-// read the fille first to avoid to read it each time someone request it
+// read the file first to avoid to read it each time someone request it
 // it's executed onece on the beging
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObject = JSON.parse(data);
 
+const templateOverveiw = fs.readFileSync(
+  `${__dirname}/templates/templateOverview.html`,
+  "utf-8"
+);
+const templateCard = fs.readFileSync(
+  `${__dirname}/templates/templateCard.html`,
+  "utf-8"
+);
+
+const replaceTemplate = (template, product) => {
+  let output = template.replace(/{%PRODUCT_NAME%}/g, product.productName);
+  output = output.replace(/{%IMAGE%}/g, product.image);
+  output = output.replace(/{%ID%}/g, product.id);
+  output = output.replace(/{%FROM%}/g, product.from);
+  output = output.replace(/{%FROM%}/g, product.from);
+  output = output.replace(/{%QUANTITY%}/g, product.quantity);
+
+  return output;
+};
+
 // create server using createServer methode
 // and past a response for all request
 const server = http.createServer((req, res) => {
-  // request url is /  and /favicon.ico by default
-  // console.log(req.url);
-
   const pathName = req.url;
 
+  // OVERVIEW PAGE
   if (pathName === "/" || pathName === "/overview") {
-    // if path is equal to /  or /overview, then send respons :
-    res.end("This is the OVERVIEW");
+    const cardHtml = dataObject
+      .map((el) => replaceTemplate(templateCard, el))
+      .join("");
+
+    const output = templateOverveiw.replace(/{%PRODUCT_CARD%}/g, cardHtml);
+    res.writeHead(200, {
+      "Content-type": "text/html", // format respons as json
+    });
+    res.end(output);
+
+    // PRODUCT
   } else if (pathName === "/product") {
     res.end("This is the PRODUCT");
+
+    // API
   } else if (pathName === "/api") {
-    res.writeHead(200, {     
-      "Content-type": "application/json",  // format respons as json
+    res.writeHead(200, {
+      "Content-type": "application/json", // format respons as json
     });
     res.end(data);
   } else {

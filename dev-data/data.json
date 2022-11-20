@@ -1,6 +1,37 @@
 [
-  { "id": 0, "productName": "tomato", "from": "Madagascar" },
-  { "id": 1, "productName": "banana", "from": "Madagascar" },
-  { "id": 2, "productName": "potato", "from": "Madagascar" },
-  { "id": 3, "productName": "anana", "from": "Madagascar" }
+  {
+    "id": 0,
+    "productName": "tomato",
+    "from": "Madagascar",
+    "quantity": 5,
+    "image": "🍅"
+  },
+  {
+    "id": 1,
+    "productName": "banana",
+    "from": "Madagascar",
+    "quantity": 10,
+    "image": "🍌"
+  },
+  {
+    "id": 2,
+    "productName": "potato",
+    "from": "Madagascar",
+    "quantity": 30,
+    "image": "🍠"
+  },
+  {
+    "id": 3,
+    "productName": "carote",
+    "from": "Madagascar",
+    "quantity": 9,
+    "image": "🥕"
+  },
+  {
+    "id": 4,
+    "productName": "concombre",
+    "from": "Madagascar",
+    "quantity": 4,
+    "image": "🥒"
+  }
 ]
