@@ -16,6 +16,10 @@ const templateCard = fs.readFileSync(
   `${__dirname}/templates/templateCard.html`,
   "utf-8"
 );
+const templateProduct = fs.readFileSync(
+  `${__dirname}/templates/product.html`,
+  "utf-8"
+);
 
 const replaceTemplate = (template, product) => {
   let output = template.replace(/{%PRODUCT_NAME%}/g, product.productName);
@@ -31,12 +35,10 @@ const replaceTemplate = (template, product) => {
 // create server using createServer methode
 // and past a response for all request
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
-  
-  console.log(url.parse(req.url,true))
+  const { query, pathname } = url.parse(req.url, true);
 
   // OVERVIEW PAGE
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     const cardHtml = dataObject
       .map((el) => replaceTemplate(templateCard, el))
       .join("");
@@ -48,11 +50,17 @@ const server = http.createServer((req, res) => {
     res.end(output);
 
     // PRODUCT
-  } else if (pathName === "/product") {
-    res.end("This is the PRODUCT");
+  } else if (pathname === "/product") {
+    res.writeHead(200, {
+      "Content-type": "text/html", // format respons as json
+    });
+    const product = dataObject[query.id];
+    const output = replaceTemplate(templateProduct, product);
+    console.log(query);
+    res.end(output);
 
     // API
-  } else if (pathName === "/api") {
+  } else if (pathname === "/api") {
     res.writeHead(200, {
       "Content-type": "application/json", // format respons as json
     });
