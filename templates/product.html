@@ -7,14 +7,23 @@
     <title>{%PRODUCT_NAME%}</title>
   </head>
   <body>
-    <h1>{%PRODUCT_NAME%} {%IMAGE%}</h1>
     <div>
       <a href="/overview">Back to Overview</a>
     </div>
+    <h1>{%PRODUCT_NAME%} {%IMAGE%}</h1>
     <p>From : {%FROM%}</p>
     <p>Quantity : {%QUANTITY%}</p>
     <div>
-      {%DESCRIPTIF%}
+      <h2>Descriptif<h2>
+        <p class="descriptif">{%DESCRIPTIF%}</p>   
     </div>
   </body>
 </html>
+
+<!-- Styles -->
+
+<style>
+  .descriptif{
+    font-weight:100;
+  }
+</style>
