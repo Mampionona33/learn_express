@@ -32,6 +32,8 @@ const replaceTemplate = (template, product) => {
 // and past a response for all request
 const server = http.createServer((req, res) => {
   const pathName = req.url;
+  
+  console.log(url.parse(req.url,true))
 
   // OVERVIEW PAGE
   if (pathName === "/" || pathName === "/overview") {

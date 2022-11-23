@@ -9,10 +9,15 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "node index.js": {
+    "start": {
       "name": "node index.js",
       "command": "node index.js",
-      "runAtStart": true
+      "runAtStart": false
+    },
+    "stop server": {
+      "name": "Stop server",
+      "command": "C",
+      "runAtStart": false
     }
   }
 }
