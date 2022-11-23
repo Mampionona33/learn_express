@@ -4,34 +4,61 @@
     "productName": "tomato",
     "from": "Madagascar",
     "quantity": 5,
-    "image": "🍅"
+    "image": "🍅",
+    "descriptif": `La tomate (Solanum lycopersicum L.) est une espèce de plantes herbacées du genre Solanum de la famille des Solanacées originaire du Mexique.
+     Le terme désigne aussi ce fruit charnu. La tomate se consomme comme un légume-fruit, crue ou cuite.
+      Elle est devenue un élément incontournable de la gastronomie dans de nombreux pays, et tout particulièrement dans le bassin méditerranéen.
+      L'espèce compte quelques variétés botaniques, dont la « tomate-cerise » et plusieurs milliers de variétés cultivées (cultivars identifiés par des appellations ou des marques commerciales).
+      La plante est cultivée en plein champ ou sous abri par les agriculteurs et les horticulteurs sous presque toutes les latitudes, sur une superficie d'environ trois millions d'hectares.
+       La tomate a donné lieu au développement d'une importante industrie de transformation, pour la fabrication de concentré, de sauce tomate, notamment de sauce ketchup, de jus de légumes et de conserves.`
   },
   {
     "id": 1,
     "productName": "banana",
     "from": "Madagascar",
     "quantity": 10,
-    "image": "🍌"
+    "image": "🍌",
+    "descriptif": "La banane est le fruit ou la baie dérivant de l’inflorescence du bananier.Les bananes sont des fruits très généralement stériles issus de variétés domestiquées. Seuls les fruits des bananiers sauvages et de quelques cultivars domestiques contiennent des graines. Les bananes sont généralement jaunes avec des taches brunâtres lorsqu'elles sont mûres et vertes quand elles ne le sont pas. Les bananes constituent un élément essentiel du régime alimentaire dans certaines régions, comme en Ouganda3, qui offrirait une cinquantaine de variétés de ce fruit4."
   },
   {
     "id": 2,
     "productName": "potato",
     "from": "Madagascar",
     "quantity": 30,
-    "image": "🍠"
+    "image": "🍠",
+    "descriptif": `
+    La patate1 (Ipomoea batatas), ou patate douce Écouter, est une espèce de plantes dicotylédones de la famille des Convolvulaceae, 
+    tribu des Ipomoeeae, vraisemblablement originaire d'Amérique tropicale. 
+    C'est une plante herbacée vivace dont la culture est très répandue dans toutes les régions tropicales et subtropicales, 
+    où on la cultive principalement pour ses tubercules (racines tubérisées) comestibles, riches en amidon. 
+    Le terme « patate » désigne aussi par métonymie les tubercules produits par cette plante. La patate est un cultigène hexaploïde, 
+    inconnu à l'état sauvage, cependant on a découvert en Amérique du Sud des formes sauvages tétraploïdes d’Ipomoea batatas2.
+    `
   },
   {
     "id": 3,
     "productName": "carote",
     "from": "Madagascar",
     "quantity": 9,
-    "image": "🥕"
+    "image": "🥕",
+    "descriptif": `
+    La Carotte (Daucus carota subsp. sativus) est une plante bisannuelle de la famille des Apiacées (aussi appelées Ombellifères), 
+    largement cultivée pour sa racine pivotante charnue, comestible, de couleur généralement orangée, 
+    consommée comme légume. La carotte représente, après la pomme de terre, le principal légume-racine cultivé dans le monde2. 
+    C'est une racine riche en carotène.
+    `
   },
   {
     "id": 4,
     "productName": "concombre",
     "from": "Madagascar",
     "quantity": 4,
-    "image": "🥒"
+    "image": "🥒",
+    "descriptif": `
+    Le concombre (Cucumis sativus) est une plante potagère herbacée, rampante, de la même famille que la calebasse africaine, 
+    le melon ou la courge (famille des Cucurbitacées). C'est botaniquement un fruit qui est consommé comme un légume. 
+    Il est de la même espèce (Cucumis sativus) que le cornichon, consommé lui comme condiment1. 
+    La plante, qui poussait naturellement au pied de l'Himalaya, aurait été domestiquée pour la première fois en Inde il y a au moins 3 000 ans2.
+    `
   }
 ]
