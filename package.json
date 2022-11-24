@@ -1,0 +1,20 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "learning nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mampionona33/learn_express.git"
+  },
+  "keywords": [],
+  "author": "RMAHAZOMANANA Tsanta Mamipionona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mampionona33/learn_express/issues"
+  },
+  "homepage": "https://github.com/Mampionona33/learn_express#readme"
+}
