@@ -4,11 +4,20 @@ const url = require("url");
 const fs = require("fs");
 const replaceTemplate = require("./modules/replaceTemplate");
 
+const slugify = require("slugify");
+/* 
+  slug is the last part of url that contain unique string
+  that contain the ressource that the wibe site is displaying
+*/
 // read the file first to avoid to read it each time someone request it
 // it's executed onece on the beging
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObject = JSON.parse(data);
 
+const slugs = dataObject.map((item) =>
+  slugify(item.productName, { lower: true })
+);
+console.log(slugs);
 const templateOverveiw = fs.readFileSync(
   `${__dirname}/templates/templateOverview.html`,
   "utf-8"
