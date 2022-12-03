@@ -1,12 +1,40 @@
-// inport module with require
 const fs = require("fs");
+const superagent = require("superagent");
 
-// using the fs module to read file
-const myText = fs.readFileSync("./txt/input.txt", "utf-8");
-console.log(myText);
+const readFilePromise = (file) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(file, "utf8", (err, data) => {
+      if (err) return reject("Can not read file 😞");
+      resolve(data);
+    });
+  });
+};
 
-// create the output file
-const txtOut = `this is the output text : ${myText}. \n Created onn ${Date.now()}`;
-// write file
-fs.writeFileSync("./txt/output.txt", txtOut);
-console.log("File writen");
+const writeFilePromise = (file, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(file, data, (err) => {
+      if (err) reject("Can not write this file 🥺");
+      resolve("file create succesfuly");
+    });
+  });
+};
+
+// Use promise to prevent calback hell > form of calbacks
+// use return at the end of each then
+
+readFilePromise(`${__dirname}/input.txt`)
+  .then((data) => {
+    const url = `https://random.imagecdn.app/500/${data}`;
+    return superagent.get(url);
+  })
+  .then((res) => {
+    return writeFilePromise(
+      `${__dirname}/output.txt`,
+      res.redirects[1],
+      "utf8"
+    );
+  })
+  .then(() => console.log("File successfully create"))
+  .catch((error) => {
+    console.log(error.message);
+  });
