@@ -23,7 +23,7 @@ const getPic = async () => {
   try {
     const data = await readFilePromise(`${__dirname}/input.txt`);
     console.log(data);
-    const url = `https://random.imagecdnx.app/500/${data}`;
+    const url = `https://random.imagecdn.app/500/${data}`;
     const res = await superagent.get(url);
     console.log(res.redirects[1]);
     await writeFilePromise(`${__dirname}/output.txt`, res.redirects[1], "utf8");
