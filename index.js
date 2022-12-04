@@ -24,9 +24,22 @@ const getPic = async () => {
     const data = await readFilePromise(`${__dirname}/input.txt`);
     console.log(data);
     const url = `https://random.imagecdn.app/500/${data}`;
-    const res = await superagent.get(url);
-    console.log(res.redirects[1]);
-    await writeFilePromise(`${__dirname}/output.txt`, res.redirects[1], "utf8");
+    // just save promise inside variable. Not wating it with await
+    const res1 = superagent.get(url);
+    const res2 = superagent.get(url);
+    const res3 = superagent.get(url);
+
+    // then use await Promise.all to store all promise responses in on array
+    const allPromise = await Promise.all([res1, res2, res3]);
+    const images = allPromise.map((el) => el.redirects[1]);
+
+    console.log(images);
+
+    await writeFilePromise(
+      `${__dirname}/output.txt`,
+      images.join("\n"),
+      "utf8"
+    );
   } catch (error) {
     // using throw to return error as respons of promise when there is error
     throw error;
