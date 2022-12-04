@@ -28,9 +28,8 @@ const getPic = async () => {
     console.log(res.redirects[1]);
     await writeFilePromise(`${__dirname}/output.txt`, res.redirects[1], "utf8");
   } catch (error) {
-    console.log(error.message);
     // using throw to return error as respons of promise when there is error
-    throw error.message;
+    throw error;
   }
   return "2: ready";
 };
