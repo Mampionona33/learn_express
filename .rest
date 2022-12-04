@@ -1,6 +1,12 @@
 # Get request
-GET http://localhost:3000/ HTTP/1.1
+GET http://localhost:3000/api/v1/tours HTTP/1.1
 
 ###
 # Post request
-POST http://localhost:3000/ HTTP/1.1
+POST http://localhost:3000/api/v1/tours HTTP/1.1
+content-type: application/json
+
+{
+    "name": "tour 4",
+    "description": "this is tour 4"
+}
