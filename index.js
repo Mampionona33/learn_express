@@ -23,7 +23,7 @@ const getPic = async () => {
   try {
     const data = await readFilePromise(`${__dirname}/input.txt`);
     console.log(data);
-    const url = `https://random.imagecdn.app/500/${data}`;
+    const url = `https://random.imagecdnx.app/500/${data}`;
     const res = await superagent.get(url);
     console.log(res.redirects[1]);
     await writeFilePromise(`${__dirname}/output.txt`, res.redirects[1], "utf8");
@@ -34,12 +34,14 @@ const getPic = async () => {
   return "2: ready";
 };
 
-console.log("1- Will get pic");
-getPic()
-  .then((res) => {
+// using imediatly invoked function
+(async () => {
+  try {
+    console.log("1- Will get pic");
+    const res = await getPic();
     console.log(res);
     console.log("3- task done");
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
