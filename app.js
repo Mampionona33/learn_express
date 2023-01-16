@@ -18,6 +18,24 @@ app.get('/api/v1/tours', (req, res) => {
     .json({ status: 'succes', result: tours.length, data: { tours: tours } });
 });
 
+// GET one tour from database
+app.get('/api/v1/tours/:id', (req, res) => {
+  // to create optional parameter add ? after params like : /api/v1/tours/:id?
+  // params are variables from url
+  const id = req.params.id * 1;
+
+  if (id > tours.length - 1) {
+    console.log(id, tours.length);
+    return res.status(404).json({ message: 'Invalid id' });
+  }
+
+  const tour = tours.find((el) => el._id === id);
+  res.status(200).json({
+    status: 'succes',
+    data: { tour: tour },
+  });
+});
+
 // Add new tours to database
 app.post('/api/v1/tours', (req, res) => {
   /* 
