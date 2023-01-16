@@ -23,7 +23,7 @@ content-type: application/json
 
 # Delete tour
 # The id of the tour must be less than 5
-DELETE http://localhost:3000/api/v1/tours/6 HTTP/1.1
+DELETE http://localhost:3000/api/v1/tours/4 HTTP/1.1
 
 ###
 

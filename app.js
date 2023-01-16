@@ -164,19 +164,26 @@ const deleteTour = (req, res) => {
 /* *******************************
  *************************ROUTES */
 // GET all tours from database
-app.get('/api/v1/tours', getTours);
+
+const toursBasedUrl = '/api/v1/tours';
+const tourByIdBasedUrl = '/api/v1/tours/:id';
+
+// app.get('/api/v1/tours', getTours);
 
 // GET one tour from database
-app.get('/api/v1/tours/:id', getTour);
+// app.get('/api/v1/tours/:id', getTour);
 
 // Create new tours to database
-app.post('/api/v1/tours', createTour);
+// app.post('/api/v1/tours', createTour);
 
 // Update tour
-app.patch('/api/v1/tours/:id', updateTour);
+// app.patch('/api/v1/tours/:id', updateTour);
 
 // Delete tour
-app.delete('/api/v1/tours/:id', deleteTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+app.route(toursBasedUrl).get(getTours).post(createTour);
+app.route(tourByIdBasedUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
 const PORT = 3000;
 
