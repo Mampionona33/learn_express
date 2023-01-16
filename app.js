@@ -36,7 +36,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   });
 });
 
-// Add new tours to database
+// Create new tours to database
 app.post('/api/v1/tours', (req, res) => {
   /* 
     in a real data base the id will be create automaticaly
@@ -58,6 +58,43 @@ app.post('/api/v1/tours', (req, res) => {
           tour: newTour,
         },
       });
+    }
+  );
+});
+
+// Update tour
+app.patch('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  const selectedTour = tours.filter((el) => el._id === id);
+  const updatedTours = tours.filter((el) => el._id !== id);
+
+  const updeatedTour = selectedTour.map((el) => {
+    return Object.assign({}, el, req.body);
+  });
+  updatedTours.push(updeatedTour[0]);
+  console.log(updatedTours);
+
+  // Validation
+  if (id > tours.length - 1) {
+    console.log(id, tours.length);
+    return res.status(404).json({ message: 'Invalid id' });
+  }
+
+  // update data after passing validation
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(updatedTours),
+    (err) => {
+      res.status(201).json({
+        status: 'succes',
+        message: `tour : ${id} has been successfully update`,
+      });
+      if (err) {
+        return res.status(404).json({
+          status: 'failed',
+          message: 'error while trying to update the data',
+        });
+      }
     }
   );
 });

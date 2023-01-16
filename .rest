@@ -7,6 +7,19 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 # The id of the tour must be less than 5
 GET http://localhost:3000/api/v1/tours/4 HTTP/1.1
 
+###
+
+# Update tour
+# The id of the tour must be less than 5
+PATCH http://localhost:3000/api/v1/tours/2 HTTP/1.1
+content-type: application/json
+
+{
+    "name" : "tour 02",
+    "description": "this is tour 02"
+}
+
+###
 
 # Post request create tours
 POST http://localhost:3000/api/v1/tours HTTP/1.1
@@ -16,3 +29,4 @@ content-type: application/json
     "name": "tour 4",
     "description": "this is tour 4"
 }
+###
