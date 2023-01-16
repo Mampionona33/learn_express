@@ -72,10 +72,11 @@ app.patch('/api/v1/tours/:id', (req, res) => {
     return Object.assign({}, el, req.body);
   });
   updatedTours.push(updeatedTour[0]);
-  console.log(updatedTours);
+
+  console.log(selectedTour);
 
   // Validation
-  if (id > tours.length - 1) {
+  if (id > tours.length - 1 || selectedTour.length <= 0) {
     console.log(id, tours.length);
     return res.status(404).json({ message: 'Invalid id' });
   }
@@ -88,6 +89,37 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       res.status(201).json({
         status: 'succes',
         message: `tour : ${id} has been successfully update`,
+      });
+      if (err) {
+        return res.status(404).json({
+          status: 'failed',
+          message: 'error while trying to update the data',
+        });
+      }
+    }
+  );
+});
+
+// Delete tour
+app.delete('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  const updatedTours = tours.filter((el) => el._id !== id);
+
+  console.log(updatedTours);
+
+  // Validation
+  if (id > tours.length - 1) {
+    return res.status(404).json({ message: 'Invalid id' });
+  }
+
+  // update data after passing validation
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(updatedTours),
+    (err) => {
+      res.status(201).json({
+        status: 'succes',
+        message: `tour : ${id} has been successfully deleted`,
       });
       if (err) {
         return res.status(404).json({
