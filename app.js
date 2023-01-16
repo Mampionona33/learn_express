@@ -6,6 +6,31 @@ const app = express();
 // If we do not use it, so the data from the methode post will be undefined
 app.use(express.json());
 
+/* 
+  1) Express middleware are inline executting function process between the request
+     and the final response;
+     Request ----> middleware_1(next()) ----> middleware_2(next()) ----> middleware_3(next()) ----> Response
+  2) To add a middleware to the express middleware stack, use the function "use" 
+     exemple : app.use(express.json()), in this exemple express.json() is a middleware
+  3) A midlare function alredy get three parameters : request, response and next.
+     next is a  function with must be called at the end of every middleware function
+     it is use to pass the respons to the next middleware. If you forgot to add it
+     to the end of your middleware, your request will stay on pending.
+*/
+
+// One exemple of middleware
+app.use((req, res, next) => {
+  console.log('hello from middleware 👋');
+  next();
+});
+
+// another example of of middleware
+// we call it on the request getTourss
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 // Read data from local data base
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
@@ -14,9 +39,12 @@ const tours = JSON.parse(
 /* ********************************
  **************ROUTE CONTROLLERS */
 const getTours = (req, res) => {
-  res
-    .status(200)
-    .json({ status: 'succes', result: tours.length, data: { tours: tours } });
+  res.status(200).json({
+    status: 'succes',
+    'requested at': req.requestTime,
+    result: tours.length,
+    data: { tours: tours },
+  });
 };
 
 const getTour = (req, res) => {
