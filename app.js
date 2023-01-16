@@ -11,15 +11,15 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-// GET all tours from database
-app.get('/api/v1/tours', (req, res) => {
+/* ********************************
+ **************ROUTE CONTROLLERS */
+const getTours = (req, res) => {
   res
     .status(200)
     .json({ status: 'succes', result: tours.length, data: { tours: tours } });
-});
+};
 
-// GET one tour from database
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
   // to create optional parameter add ? after params like : /api/v1/tours/:id?
   // params are variables from url
   const id = req.params.id * 1;
@@ -34,10 +34,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
     status: 'succes',
     data: { tour: tour },
   });
-});
+};
 
-// Create new tours to database
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   /* 
     in a real data base the id will be create automaticaly
     but in this facke data , we will create a id
@@ -60,10 +59,9 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-});
+};
 
-// Update tour
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
   const id = req.params.id * 1;
   const selectedTour = tours.filter((el) => el._id === id);
   const updatedTours = tours.filter((el) => el._id !== id);
@@ -98,10 +96,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       }
     }
   );
-});
+};
 
-// Delete tour
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
   const id = req.params.id * 1;
   const updatedTours = tours.filter((el) => el._id !== id);
 
@@ -129,7 +126,24 @@ app.delete('/api/v1/tours/:id', (req, res) => {
       }
     }
   );
-});
+};
+
+/* *******************************
+ *************************ROUTES */
+// GET all tours from database
+app.get('/api/v1/tours', getTours);
+
+// GET one tour from database
+app.get('/api/v1/tours/:id', getTour);
+
+// Create new tours to database
+app.post('/api/v1/tours', createTour);
+
+// Update tour
+app.patch('/api/v1/tours/:id', updateTour);
+
+// Delete tour
+app.delete('/api/v1/tours/:id', deleteTour);
 
 const PORT = 3000;
 
