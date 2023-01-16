@@ -1,6 +1,12 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
+const morgan = require('morgan');
+
+/* ********************************
+ ********************MIDDLEWARES */
+// morgan is HTTP request logger middleware for node.js
+app.use(morgan('dev'));
 
 // expres.json() is a middleware to modify the incomming request
 // If we do not use it, so the data from the methode post will be undefined
@@ -53,7 +59,6 @@ const getTour = (req, res) => {
   const id = req.params.id * 1;
 
   if (id > tours.length - 1) {
-    console.log(id, tours.length);
     return res.status(404).json({ message: 'Invalid id' });
   }
 
