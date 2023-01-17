@@ -1,1 +1,30 @@
-[{"_id":0,"name":"tour 0","description":"this is tour 0"},{"_id":1,"name":"tour 1","description":"this is tour 1"},{"_id":2,"name":"tour 2","description":"this is tour 2"},{"_id":3,"name":"BEZAVA LAHY","description":"this is tour 3"}]
+[
+  {
+    "_id": 0,
+    "name": "LENDREMA",
+    "lasteName": "Patrique",
+    "email": "partrique@gmail.com",
+    "password": "12345"
+  },
+  {
+    "_id": 1,
+    "name": "DADAO",
+    "lasteName": "Mazava",
+    "email": "mazava@gmail.com",
+    "password": "12345"
+  },
+  {
+    "_id": 2,
+    "name": "BEKOTO",
+    "lasteName": "Tsitoaina",
+    "email": "tsitoaina@gmail.com",
+    "password": "12345"
+  },
+  {
+    "_id": 3,
+    "name": "BEZAVALAHY",
+    "lasteName": "Fetra",
+    "email": "fetra@gmail.com",
+    "password": "12345"
+  }
+]
