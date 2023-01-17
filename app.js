@@ -305,15 +305,21 @@ const deleteUser = (req, res) => {
 
 // ------------- Tours routes ----------------
 const toursBasedUrl = '/api/v1/tours';
-const tourByIdBasedUrl = '/api/v1/tours/:id';
-app.route(toursBasedUrl).get(getTours).post(createTour);
-app.route(tourByIdBasedUrl).get(getTour).patch(updateTour).delete(deleteTour);
+
+const tourRouter = express.Router();
+const userRouter = express.Router();
+
+tourRouter.route('/').get(getTours).post(createTour);
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
 // ------------------- User Routes -------------------
 const userBasedUrl = '/api/v1/users';
-const userByIdBasedUrl = '/api/v1/users/:id';
-app.route(userBasedUrl).get(getUsers).post(createUser);
-app.route(userByIdBasedUrl).get(getUser).patch(updateUser).delete(deleteUser);
+
+userRouter.route('/').get(getUsers).post(createUser);
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+
+app.use(toursBasedUrl, tourRouter);
+app.use(userBasedUrl, userRouter);
 
 const PORT = 3000;
 
