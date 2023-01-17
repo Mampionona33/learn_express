@@ -5,6 +5,21 @@ const dbPath = `${__dirname}/../dev-data/data/tours-simple.json`;
 const tours = JSON.parse(fs.readFileSync(`${dbPath}`));
 
 // -----------tours controllers ---------------
+// create a validation middleware
+// It will use before running the route in tourRoutes
+// to check if the param id is valids.
+// So if the param is valid we don't need to check it
+// for the rest of the middleware stack
+exports.idValidation = (req, res, next, val) => {
+  const id = val * 1;
+  const updatedTours = tours.filter((el) => el._id !== id);
+  //   console.log(updatedTours);
+  if (id > tours.length - 1) {
+    return res.status(404).json({ message: 'Invalid id' });
+  }
+  next();
+};
+
 exports.getTours = (req, res) => {
   res.status(200).json({
     status: 'succes',
@@ -15,14 +30,7 @@ exports.getTours = (req, res) => {
 };
 
 exports.getTour = (req, res) => {
-  // to create optional parameter add ? after params like : /api/v1/tours/:id?
-  // params are variables from url
   const id = req.params.id * 1;
-
-  if (id > tours.length - 1) {
-    return res.status(404).json({ message: 'Invalid id' });
-  }
-
   const tour = tours.find((el) => el._id === id);
   res.status(200).json({
     status: 'succes',
@@ -63,12 +71,6 @@ exports.updateTour = (req, res) => {
 
   console.log(selectedTour);
 
-  // Validation
-  if (id > tours.length - 1 || selectedTour.length <= 0) {
-    console.log(id, tours.length);
-    return res.status(404).json({ message: 'Invalid id' });
-  }
-
   // update data after passing validation
   fs.writeFile(`${dbPath}`, JSON.stringify(updatedTours), (err) => {
     if (err) {
@@ -85,16 +87,6 @@ exports.updateTour = (req, res) => {
 };
 
 exports.deleteTour = (req, res) => {
-  const id = req.params.id * 1;
-  const updatedTours = tours.filter((el) => el._id !== id);
-
-  console.log(updatedTours);
-
-  // Validation
-  if (id > tours.length - 1) {
-    return res.status(404).json({ message: 'Invalid id' });
-  }
-
   // update data after passing validation
   fs.writeFile(`${dbPath}`, JSON.stringify(updatedTours), (err) => {
     if (err) {
