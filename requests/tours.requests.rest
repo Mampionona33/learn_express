@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 
 # Get request get one tour 
 # The id of the tour must be less than 5
-GET http://localhost:3000/api/v1/tours/3 HTTP/1.1
+GET http://localhost:3000/api/v1/tours/4 HTTP/1.1
 
 ###
 
@@ -32,7 +32,6 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "tour 5",
-    "description": "this is tour 5"
+    "name": "tour 5"    
 }
 ###

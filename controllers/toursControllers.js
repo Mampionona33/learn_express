@@ -11,11 +11,17 @@ const tours = JSON.parse(fs.readFileSync(`${dbPath}`));
 // So if the param is valid we don't need to check it
 // for the rest of the middleware stack
 exports.idValidation = (req, res, next, val) => {
-  const id = val * 1;
-  const updatedTours = tours.filter((el) => el._id !== id);
-  //   console.log(updatedTours);
-  if (id > tours.length - 1) {
+  if (val > tours.length - 1) {
     return res.status(404).json({ message: 'Invalid id' });
+  }
+  next();
+};
+
+exports.createTourValidation = (req, res, next) => {
+  if (req.body.name === undefined || req.body.description === undefined) {
+    return res
+      .status(400)
+      .json({ message: 'bad request. name and description are required' });
   }
   next();
 };
@@ -87,6 +93,8 @@ exports.updateTour = (req, res) => {
 };
 
 exports.deleteTour = (req, res) => {
+  const id = req.params.id;
+  const updatedTours = tours.filter((el) => el._id !== id);
   // update data after passing validation
   fs.writeFile(`${dbPath}`, JSON.stringify(updatedTours), (err) => {
     if (err) {
