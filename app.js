@@ -13,6 +13,11 @@ app.use(morgan('dev'));
 // If we do not use it, so the data from the methode post will be undefined
 app.use(express.json());
 
+// serving static file frome server
+app.get('/overview.html', (req, res) => {
+  res.sendFile(`${__dirname}/public/overview.html`);
+});
+
 /* 
   1) Express middleware are inline executting function process between the request
      and the final response;
