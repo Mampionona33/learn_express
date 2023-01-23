@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 // Read data from local data base
 const dbPath = `${__dirname}/../dev-data/data/tours-simple.json`;
 const tours = JSON.parse(fs.readFileSync(`${dbPath}`));
@@ -51,11 +50,11 @@ exports.createTour = (req, res) => {
     */
   const newId = tours[tours.length - 1]._id + 1;
   // console.log(newId);
-  const newTour = Object.assign({ _id: newId }, req.body);
-  // console.log(newTour);
+  const newTour = { _id: newId, ...req.body };
+  console.log(newTour);
   tours.push(newTour);
   // use writeFile not writeFileSync inside callback function
-  fs.writeFile(`${dbPath}`, JSON.stringify(tours), (err) => {
+  fs.writeFile(`${dbPath}`, JSON.stringify(tours), () => {
     res.status(201).json({
       status: 'success',
       data: {
@@ -70,9 +69,7 @@ exports.updateTour = (req, res) => {
   const selectedTour = tours.filter((el) => el._id === id);
   const updatedTours = tours.filter((el) => el._id !== id);
 
-  const updeatedTour = selectedTour.map((el) => {
-    return Object.assign({}, el, req.body);
-  });
+  const updeatedTour = selectedTour.map((el) => ({ ...el, ...req.body }));
   updatedTours.push(updeatedTour[0]);
 
   console.log(selectedTour);
@@ -93,7 +90,7 @@ exports.updateTour = (req, res) => {
 };
 
 exports.deleteTour = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const updatedTours = tours.filter((el) => el._id !== id);
   // update data after passing validation
   fs.writeFile(`${dbPath}`, JSON.stringify(updatedTours), (err) => {

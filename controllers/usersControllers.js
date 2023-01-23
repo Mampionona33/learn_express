@@ -21,11 +21,11 @@ exports.createUser = (req, res) => {
     */
   const newId = users[users.length - 1]._id + 1;
   console.log(newId);
-  const newUser = Object.assign({ _id: newId }, req.body);
+  const newUser = ({ _id: newId }, req.body);
   console.log(newUser);
   users.push(newUser);
   // use writeFile not writeFileSync inside callback function
-  fs.writeFile(`${dbPath}`, JSON.stringify(users), (err) => {
+  fs.writeFile(`${dbPath}`, JSON.stringify(users), () => {
     res.status(201).json({
       status: 'success',
       data: {
@@ -56,9 +56,8 @@ exports.updateUser = (req, res) => {
   const selectedUser = users.filter((el) => el._id === id);
   const updatedUsers = users.filter((el) => el._id !== id);
 
-  const updeatedTour = selectedUser.map((el) => {
-    return Object.assign({}, el, req.body);
-  });
+  const updeatedTour = selectedUser.map((el) => ({ ...el, ...req.body }));
+
   updatedUsers.push(updeatedTour[0]);
 
   console.log(updatedUsers);

@@ -8,7 +8,9 @@
     "consistent-return": "off",
     "func-names": "off",
     "object-shorthand": "off",
+    "quotes": "off",
     "no-process-exit": "off",
+    "prefer-object-spread": "warn",
     "no-param-reassign": "off",
     "no-return-await": "off",
     "no-underscore-dangle": "off",
@@ -16,7 +18,7 @@
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "no-unused-vars": [
       "error",
-      { "argsInorePattern": "req | res | next | val" }
+      { "argsIgnorePattern": "req | res | next | val" }
     ]
   }
 }

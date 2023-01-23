@@ -1,9 +1,10 @@
 const express = require('express');
+
 const app = express();
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
-const dotenv = require('dotenv');
 
 /*
   In Node.js, an environment variable is a variable that is set outside of the code and can be accessed within the application. 
@@ -61,7 +62,6 @@ app.use((req, res, next) => {
 // ------------- Tours routes ----------------
 const toursBasedUrl = '/api/v1/tours';
 const userBasedUrl = '/api/v1/users';
-
 app.use(toursBasedUrl, tourRouter);
 app.use(userBasedUrl, userRouter);
 
