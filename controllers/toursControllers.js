@@ -50,9 +50,9 @@ exports.createTour = (req, res) => {
       but in this facke data , we will create a id
     */
   const newId = tours[tours.length - 1]._id + 1;
-  console.log(newId);
+  // console.log(newId);
   const newTour = Object.assign({ _id: newId }, req.body);
-  console.log(newTour);
+  // console.log(newTour);
   tours.push(newTour);
   // use writeFile not writeFileSync inside callback function
   fs.writeFile(`${dbPath}`, JSON.stringify(tours), (err) => {
