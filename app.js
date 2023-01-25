@@ -1,5 +1,7 @@
 const express = require('express');
 
+const mongoose = require('mongoose');
+
 const app = express();
 const morgan = require('morgan');
 const dotenv = require('dotenv');
@@ -15,7 +17,14 @@ const userRouter = require('./routes/userRoutes');
   It is important to note that the .env file should not be committed to version control as it contains sensitive information.
  */
 dotenv.config({ path: './.env' });
-// console.log(process.env);
+
+const DB = process.env.DATABASE_URL.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+// Connecting app to database
+mongoose.connect(DB).then(() => console.log('DB connection successful !'));
 
 /* ********************************
  ********************MIDDLEWARES */
