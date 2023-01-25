@@ -45,7 +45,4 @@ const userBasedUrl = '/api/v1/users';
 app.use(toursBasedUrl, tourRouter);
 app.use(userBasedUrl, userRouter);
 
-// -------- Run server -----------
-const PORT = 3000;
-
-app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
+module.exports = app;
