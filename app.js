@@ -26,30 +26,6 @@ const DB = process.env.DATABASE_URL.replace(
 // Connecting app to database
 mongoose.connect(DB).then(() => console.log('DB connection successful !'));
 
-// create a basic tour schema
-// Schema is used to validate data
-const tourSchema = new mongoose.Schema({
-  name: { type: String, required: [true, 'Name is required'], unique: true },
-  descripton: { type: String, required: [true, 'Description is required'] },
-});
-
-// create a basic tour model
-// Use capital letter for the first letter to declaring a model variable
-const TourModel = mongoose.model('Tour', tourSchema);
-
-const testTour = new TourModel({
-  name: 'tour 01',
-  descripton: 'this is the tour 01',
-});
-
-testTour
-  .save()
-  .then((res) => console.log(res))
-  .catch((err) => {
-    console.log(err);
-    throw err;
-  });
-
 /* ********************************
  ********************MIDDLEWARES */
 // morgan is HTTP request logger middleware for node.js
