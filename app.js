@@ -37,6 +37,19 @@ const tourSchema = new mongoose.Schema({
 // Use capital letter for the first letter to declaring a model variable
 const TourModel = mongoose.model('Tour', tourSchema);
 
+const testTour = new TourModel({
+  name: 'tour 01',
+  descripton: 'this is the tour 01',
+});
+
+testTour
+  .save()
+  .then((res) => console.log(res))
+  .catch((err) => {
+    console.log(err);
+    throw err;
+  });
+
 /* ********************************
  ********************MIDDLEWARES */
 // morgan is HTTP request logger middleware for node.js
