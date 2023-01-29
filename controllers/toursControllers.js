@@ -1,22 +1,43 @@
 const TourModel = require('../models/toursModel');
 
-exports.createTourValidation = (req, res, next) => {
-  if (req.body.name === undefined || req.body.description === undefined) {
-    return res
-      .status(400)
-      .json({ message: 'bad request. name and description are required' });
+exports.getTours = async (req, res) => {
+  try {
+    const tours = await TourModel.find();
+    res.status(200).json({
+      status: 'succes',
+      result: tours.length,
+      data: { tours },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message: error,
+    });
   }
-  next();
 };
 
-exports.getTours = (req, res) => {
-  res.status(200).json({
-    status: 'succes',
-    'requested at': req.requestTime,
-  });
+exports.getTour = async (req, res) => {
+  try {
+    /* 
+      the the req.params.id is the id from the tourRoutes
+      router.route('/:id').get(getTour)
+      this next expression is like :
+      TourModel.findOne({_id : req.params.id}) in mongodb
+      but we have findById in mongoose whitch is more simple and accurate
+    */
+    const tour = await TourModel.findById(req.params.id);
+    res.status(200).json({
+      status: 'succes',
+      result: tour.length,
+      data: { tour },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message: error,
+    });
+  }
 };
-
-exports.getTour = (req, res) => {};
 
 exports.createTour = (req, res) => {};
 

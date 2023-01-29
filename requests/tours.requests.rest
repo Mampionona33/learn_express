@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 
 # Get request get one tour 
 # The id of the tour must be less than 5
-GET http://localhost:3000/api/v1/tours/4 HTTP/1.1
+GET http://localhost:3000/api/v1/tours/63d279e87177b6250d898f2e HTTP/1.1
 
 ###
 

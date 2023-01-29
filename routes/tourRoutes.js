@@ -5,7 +5,6 @@ const {
   getTour,
   getTours,
   updateTour,
-  createTourValidation,
 } = require('../controllers/toursControllers');
 
 const router = express.Router();
@@ -18,7 +17,7 @@ const router = express.Router();
 // add the checkBody middleware to the post request
 // like so : post(checkBody, createTour);
 
-router.route('/').get(getTours).post(createTourValidation, createTour);
+router.route('/').get(getTours).post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
 module.exports = router;
