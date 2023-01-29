@@ -11,11 +11,11 @@ GET http://localhost:3000/api/v1/tours/63d279e87177b6250d898f2e HTTP/1.1
 
 # Update tour
 # The id of the tour must be less than 5
-PATCH http://localhost:3000/api/v1/tours/3 HTTP/1.1
+PATCH http://localhost:3000/api/v1/tours/63d279e87177b6250d898f2e HTTP/1.1
 content-type: application/json
 
 {
-    "name" : "tour 03",
+    "name" : "tour 001",
     "description": "this is tour 003"
 }
 
