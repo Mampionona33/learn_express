@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const tourSchema = new mongoose.Schema({
   name: { type: String, required: [true, 'Name is required'], unique: true },
 
-  descripton: { type: String, required: [true, 'Description is required'] },
+  description: { type: String, required: [true, 'Description is required'] },
 });
 
 // create a basic tour model

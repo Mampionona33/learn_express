@@ -32,6 +32,7 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "tour 5"    
+    "name": "tour 5",
+    "description" :"This is tour 2"
 }
 ###
