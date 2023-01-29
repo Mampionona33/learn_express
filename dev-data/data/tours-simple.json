@@ -1,6 +1,20 @@
 [
-  { "_id": 0, "name": "tour 0", "description": "this is tour 0" },
-  { "_id": 1, "name": "tour 1", "description": "this is tour 1" },
-  { "_id": 2, "name": "tour 2", "description": "this is tour 2" },
-  { "_id": 3, "name": "tour 03", "description": "this is tour 003" }
+  {
+    "name": "tour 0",
+    "description": "this is tour 0",
+    "duration": 5000,
+    "imageCover": "Image 1"
+  },
+  {
+    "name": "tour 1",
+    "description": "this is tour 01",
+    "duration": 4000,
+    "imageCover": "Image 2"
+  },
+  {
+    "name": "tour 2",
+    "description": "this is tour 02",
+    "duration": 3000,
+    "imageCover": "Image 3"
+  }
 ]
