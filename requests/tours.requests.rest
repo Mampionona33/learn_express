@@ -3,6 +3,10 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 
 ###
 
+#   Get request all tours with filtre
+GET http://localhost:3000/api/v1/tours/?imageCover=Image 1 HTTP/1.1
+###
+
 # Get request get one tour 
 # The id of the tour must be less than 5
 GET http://localhost:3000/api/v1/tours/63d29710bfc87c3f0c7c3d0c HTTP/1.1

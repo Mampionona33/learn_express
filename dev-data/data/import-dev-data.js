@@ -70,10 +70,10 @@ const deleteData = async () => {
 console.log(process.argv);
 
 process.argv.map((item) => {
-  if (item.match('--import') || item.match('-i')) {
+  if (item.match('--import')) {
     importData();
   }
-  if (item.match('--delete') || item.match('-d')) {
+  if (item.match('--delete')) {
     deleteData();
   }
   return null;
