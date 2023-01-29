@@ -2,11 +2,30 @@ const TourModel = require('../models/toursModel');
 
 exports.getTours = async (req, res) => {
   try {
+    // BUIL QUERY
     // Create copy of the query
     const queryObj = { ...req.query };
     console.log(queryObj);
 
-    const tours = await TourModel.find();
+    const excludeFields = ['page', 'sort', 'limit', 'fields'];
+    /* 
+      On using mongoose.set({ strictQuery: false }); in server.js
+      We must delete each element from excludeFields in queryObj
+      to ignore params that are in excludeFields
+    */
+    excludeFields.forEach((el) => delete queryObj[el]);
+    console.log(excludeFields);
+
+    /* 
+      Prepare query before using it to be 
+      able execute sorting it before the
+      await function is runing
+    */
+    const query = TourModel.find(queryObj);
+
+    // EXECUTE QUERY
+    const tours = await query;
+
     res.status(200).json({
       status: 'succes',
       result: tours.length,

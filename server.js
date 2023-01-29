@@ -26,6 +26,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+//  set strictQuery to false to force the query identic ass data in database
+//  if paramas does not exist in the schema so the response will be
+//  an empty array.
+mongoose.set({ strictQuery: false });
 // Connecting app to database
 mongoose.connect(DB).then(() => console.log('DB connection successful !'));
 

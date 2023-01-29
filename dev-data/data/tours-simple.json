@@ -16,5 +16,17 @@
     "description": "this is tour 02",
     "duration": 3000,
     "imageCover": "Image 3"
+  },
+  {
+    "name": "tour 3",
+    "description": "this is tour 03",
+    "duration": 3000,
+    "imageCover": "Image 1"
+  },
+  {
+    "name": "tour 4",
+    "description": "this is tour 03",
+    "duration": 3000,
+    "imageCover": "Image 3"
   }
 ]
