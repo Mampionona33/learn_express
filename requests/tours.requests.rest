@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 
 # Get request get one tour 
 # The id of the tour must be less than 5
-GET http://localhost:3000/api/v1/tours/63d279e87177b6250d898f2e HTTP/1.1
+GET http://localhost:3000/api/v1/tours/63d29710bfc87c3f0c7c3d0c HTTP/1.1
 
 ###
 
@@ -16,14 +16,15 @@ content-type: application/json
 
 {
     "name" : "tour 001",
-    "description": "this is tour 003"
+    "description": "This is tour 003",
+    "imageCover" : "Mountain",
 }
 
 ###
 
 # Delete tour
 # The id of the tour must be less than 5
-DELETE http://localhost:3000/api/v1/tours/63d61b9b8aa6454845e89caa HTTP/1.1
+DELETE http://localhost:3000/api/v1/tours/63d29710bfc87c3f0c7c3d0c HTTP/1.1
 
 ###
 
@@ -32,7 +33,9 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "tour 5",
-    "description" :"This is tour 2"
+    "name" : "tour 001",
+    "description": "This is tour 001",
+    "duration" : 5000,
+    "imageCover" : "Mountain"
 }
 ###
