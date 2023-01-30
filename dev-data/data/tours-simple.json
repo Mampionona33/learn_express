@@ -3,30 +3,35 @@
     "name": "tour 0",
     "description": "this is tour 0",
     "duration": 5000,
-    "imageCover": "Image 1"
+    "imageCover": "Image 1",
+    "price": 5
   },
   {
     "name": "tour 1",
     "description": "this is tour 01",
     "duration": 4000,
-    "imageCover": "Image 1"
+    "imageCover": "Image 1",
+    "price": 10
   },
   {
     "name": "tour 2",
     "description": "this is tour 02",
     "duration": 3000,
-    "imageCover": "Image 3"
+    "imageCover": "Image 3",
+    "price": 7
   },
   {
     "name": "tour 3",
     "description": "this is tour 03",
     "duration": 3000,
-    "imageCover": "Image 1"
+    "imageCover": "Image 1",
+    "price": 5
   },
   {
     "name": "tour 4",
     "description": "this is tour 03",
     "duration": 3000,
-    "imageCover": "Image 3"
+    "imageCover": "Image 3",
+    "price": 20
   }
 ]

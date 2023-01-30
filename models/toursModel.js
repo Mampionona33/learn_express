@@ -9,6 +9,7 @@ const tourSchema = new mongoose.Schema({
   imageCover: { type: String, required: [true, 'Image cover is required'] },
   images: [String],
   createAt: { type: Date, default: Date.now() },
+  price: { type: Number },
 });
 
 // create a basic tour model

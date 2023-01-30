@@ -7,6 +7,18 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2 HTTP/1.1
 ###
 
+# Get request all tours with sorting ascending order
+GET http://localhost:3000/api/v1/tours?sort=duration HTTP/1.1
+###
+
+# Get request all tours with sorting descanding order
+GET http://localhost:3000/api/v1/tours?sort=-duration HTTP/1.1
+###
+
+# Get request all tours with sorting with second parameter
+GET http://localhost:3000/api/v1/tours?sort=duration.price HTTP/1.1
+###
+
 #   Get request all tours with advanced filtering
 GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2&duration[gte]=4000 HTTP/1.1
 ###
@@ -42,9 +54,10 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name" : "tour 001",
-    "description": "This is tour 001",
-    "duration" : 5000,
-    "imageCover" : "Mountain"
+    "name": "tour 6",
+    "description": "this is tour 06",
+    "duration": 2500,
+    "imageCover": "Image 2",
+    "price": 2
 }
 ###
