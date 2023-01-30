@@ -8,7 +8,9 @@ const tourSchema = new mongoose.Schema({
   description: { type: String, required: [true, 'Description is required'] },
   imageCover: { type: String, required: [true, 'Image cover is required'] },
   images: [String],
-  createAt: { type: Date, default: Date.now() },
+  // Setting select propretie to createAt to false to not send it in
+  // the response
+  createAt: { type: Date, default: Date.now(), select: false },
   price: { type: Number },
 });
 

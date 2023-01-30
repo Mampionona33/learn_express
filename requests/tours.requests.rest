@@ -19,6 +19,14 @@ GET http://localhost:3000/api/v1/tours?sort=-duration HTTP/1.1
 GET http://localhost:3000/api/v1/tours?sort=duration.price HTTP/1.1
 ###
 
+# Get request all tours with Field limiting
+GET http://localhost:3000/api/v1/tours?fields=name.duration HTTP/1.1
+###
+
+# Get request all tours with Field limiting
+GET http://localhost:3000/api/v1/tours?fields HTTP/1.1
+###
+
 #   Get request all tours with advanced filtering
 GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2&duration[gte]=4000 HTTP/1.1
 ###
