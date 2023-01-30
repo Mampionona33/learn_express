@@ -4,8 +4,8 @@ exports.getTours = async (req, res) => {
   try {
     // BUIL QUERY
     // Create copy of the query
+    // 1) Filtering
     const queryObj = { ...req.query };
-    console.log(queryObj);
 
     const excludeFields = ['page', 'sort', 'limit', 'fields'];
     /* 
@@ -16,12 +16,18 @@ exports.getTours = async (req, res) => {
     excludeFields.forEach((el) => delete queryObj[el]);
     console.log(excludeFields);
 
+    // 2) Advanced filtering
+    let queryStr = JSON.stringify(queryObj);
+    // replace gte|gt|lte|lt by mongodb operators $gte|$gt|$lte|$lt
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+
     /* 
       Prepare query before using it to be 
       able execute sorting it before the
       await function is runing
     */
-    const query = TourModel.find(queryObj);
+    console.log(JSON.parse(queryStr));
+    const query = TourModel.find(JSON.parse(queryStr));
 
     // EXECUTE QUERY
     const tours = await query;
