@@ -40,7 +40,7 @@ exports.getTours = async (req, res) => {
 
     // 3) Field limiting
     if (req.query.fields) {
-      const fields = req.query.fields.split(',').join(' ');
+      const fields = req.query.fields.split('.').join(' ');
       query = query.select(fields);
     } else {
       // This is use to remove the __v variable in the fields
