@@ -12,6 +12,7 @@ const tourSchema = new mongoose.Schema({
   // the response
   createAt: { type: Date, default: Date.now(), select: false },
   price: { type: Number },
+  ratingAverage: { type: Number, default: 0 },
 });
 
 // create a basic tour model

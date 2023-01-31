@@ -1,5 +1,12 @@
 const TourModel = require('../models/toursModel');
 
+exports.aliasTopTours = async (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingAverage.price';
+  req.query.fields = 'name.price.ratingAverage.duration';
+  next();
+};
+
 exports.getTours = async (req, res) => {
   try {
     // BUIL QUERY
@@ -35,6 +42,7 @@ exports.getTours = async (req, res) => {
       query = query.sort(sortBy);
     } else {
       // default sorting if user does not give sorting
+      // the minus signe "-" is use to invert order of sorting
       query = query.sort('-createAt');
     }
 

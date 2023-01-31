@@ -5,6 +5,7 @@ const {
   getTour,
   getTours,
   updateTour,
+  aliasTopTours,
 } = require('../controllers/toursControllers');
 
 const router = express.Router();
@@ -16,6 +17,9 @@ const router = express.Router();
 // if not send back 400 (bad request)
 // add the checkBody middleware to the post request
 // like so : post(checkBody, createTour);
+
+// to make top five tours
+router.route('/top-5-cheaps').get(aliasTopTours, getTours);
 
 router.route('/').get(getTours).post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);

@@ -10,6 +10,10 @@ GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2 HTTP/1.1
 GET http://localhost:3000/api/v1/tours?page=2&limit=2 HTTP/1.1
 ###
 
+# Get tour top five
+GET http://localhost:3000/api/v1/tours/top-5-cheaps HTTP/1.1
+###
+
 # Get request all tours with sorting ascending order
 GET http://localhost:3000/api/v1/tours?sort=duration HTTP/1.1
 ###

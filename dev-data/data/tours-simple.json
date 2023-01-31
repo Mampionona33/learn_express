@@ -4,34 +4,71 @@
     "description": "this is tour 0",
     "duration": 5000,
     "imageCover": "Image 1",
-    "price": 5
+    "price": 5,
+    "ratingAverage": 5
   },
   {
     "name": "tour 1",
     "description": "this is tour 01",
     "duration": 4000,
     "imageCover": "Image 1",
-    "price": 10
+    "price": 10,
+    "ratingAverage": 3
   },
   {
     "name": "tour 2",
     "description": "this is tour 02",
     "duration": 3000,
     "imageCover": "Image 3",
-    "price": 7
+    "price": 7,
+    "ratingAverage": 4
   },
   {
     "name": "tour 3",
     "description": "this is tour 03",
     "duration": 3000,
     "imageCover": "Image 1",
-    "price": 5
+    "price": 5,
+    "ratingAverage": 5
   },
   {
     "name": "tour 4",
     "description": "this is tour 03",
     "duration": 3000,
     "imageCover": "Image 3",
-    "price": 20
+    "price": 20,
+    "ratingAverage": 3
+  },
+  {
+    "name": "tour 5",
+    "description": "this is tour 05",
+    "duration": 3000,
+    "imageCover": "Image 3",
+    "price": 20,
+    "ratingAverage": 5
+  },
+  {
+    "name": "tour 6",
+    "description": "this is tour 06",
+    "duration": 3000,
+    "imageCover": "Image 34",
+    "price": 20,
+    "ratingAverage": 4
+  },
+  {
+    "name": "tour 7",
+    "description": "this is tour 07",
+    "duration": 3000,
+    "imageCover": "Image 4",
+    "price": 10,
+    "ratingAverage": 3
+  },
+  {
+    "name": "tour 8",
+    "description": "this is tour 08",
+    "duration": 3000,
+    "imageCover": "Image 4",
+    "price": 9,
+    "ratingAverage": 5
   }
 ]
