@@ -1,10 +1,13 @@
 # Get request get all tours
 GET http://localhost:3000/api/v1/tours HTTP/1.1
-
 ###
 
 #   Get request all tours with filtre
 GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2 HTTP/1.1
+###
+
+#   Get request all tours with pagination
+GET http://localhost:3000/api/v1/tours?page=2&limit=2 HTTP/1.1
 ###
 
 # Get request all tours with sorting ascending order
