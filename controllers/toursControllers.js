@@ -7,70 +7,136 @@ exports.aliasTopTours = async (req, res, next) => {
   next();
 };
 
+class APIFeatures {
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryString = queryString;
+  }
+
+  filter() {
+    const queryObj = { ...this.queryString };
+    const excludeFields = ['page', 'sort', 'limit', 'fields'];
+    excludeFields.forEach((el) => delete queryObj[el]);
+    // 1B) Advanced filtering
+    let queryStr = JSON.stringify(queryObj);
+    // replace gte|gt|lte|lt by mongodb operators $gte|$gt|$lte|$lt
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    this.query.find(JSON.parse(queryStr));
+
+    // return this allow to chain the methodes
+    return this;
+  }
+
+  sort() {
+    // 2) Sorting
+    if (this.queryString.sort) {
+      const sortBy = this.queryString.sort.split('.').join(' ');
+      this.query = this.query.sort(sortBy);
+    } else {
+      // default sorting if user does not give sorting
+      // the minus signe "-" is use to invert order of sorting
+      this.query = this.query.sort('-createAt');
+    }
+    return this;
+  }
+
+  limitFields() {
+    // 3) Field limiting
+    if (this.queryString.fields) {
+      const fields = this.queryString.fields.split('.').join(' ');
+      this.query = this.query.select(fields);
+    } else {
+      // This is use to remove the __v variable in the fields
+      this.query = this.query.select('-__v');
+    }
+
+    return this;
+  }
+
+  paginate() {
+    // 4) Pagination
+    const page = this.queryString.page * 1 || 1;
+    const limit = this.queryString.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+    // page=10&limit=10 <=> query.skip(10).limit(10) <=> 1-10 page1 ; 11-20 page 2; ...
+    this.query = this.query.skip(skip).limit(limit);
+
+    return this;
+  }
+}
+
 exports.getTours = async (req, res) => {
   try {
     // BUIL QUERY
     // Create copy of the query
     // 1A) Filtering
-    const queryObj = { ...req.query };
+    // const queryObj = { ...req.query };
 
-    const excludeFields = ['page', 'sort', 'limit', 'fields'];
+    // const excludeFields = ['page', 'sort', 'limit', 'fields'];
     /* 
       On using mongoose.set({ strictQuery: false }); in server.js
       We must delete each element from excludeFields in queryObj
       to ignore params that are in excludeFields
     */
-    excludeFields.forEach((el) => delete queryObj[el]);
-    console.log(excludeFields);
+    // excludeFields.forEach((el) => delete queryObj[el]);
+    // console.log(excludeFields);
 
     // 1B) Advanced filtering
-    let queryStr = JSON.stringify(queryObj);
-    // replace gte|gt|lte|lt by mongodb operators $gte|$gt|$lte|$lt
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    // let queryStr = JSON.stringify(queryObj);
+    // // replace gte|gt|lte|lt by mongodb operators $gte|$gt|$lte|$lt
+    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
     /* 
       Prepare query before using it to be 
       able execute sorting it before the
       await function is runing
     */
-    console.log(JSON.parse(queryStr));
-    let query = TourModel.find(JSON.parse(queryStr));
+    // console.log(JSON.parse(queryStr));
+    // let query = TourModel.find(JSON.parse(queryStr));
 
-    // 2) Sorting
-    if (req.query.sort) {
-      const sortBy = req.query.sort.split('.').join(' ');
-      query = query.sort(sortBy);
-    } else {
-      // default sorting if user does not give sorting
-      // the minus signe "-" is use to invert order of sorting
-      query = query.sort('-createAt');
-    }
+    // // 2) Sorting
+    // if (req.query.sort) {
+    //   const sortBy = req.query.sort.split('.').join(' ');
+    //   query = query.sort(sortBy);
+    // } else {
+    //   // default sorting if user does not give sorting
+    //   // the minus signe "-" is use to invert order of sorting
+    //   query = query.sort('-createAt');
+    // }
 
-    // 3) Field limiting
-    if (req.query.fields) {
-      const fields = req.query.fields.split('.').join(' ');
-      query = query.select(fields);
-    } else {
-      // This is use to remove the __v variable in the fields
-      query = query.select('-__v');
-    }
+    // // 3) Field limiting
+    // if (req.query.fields) {
+    //   const fields = req.query.fields.split('.').join(' ');
+    //   query = query.select(fields);
+    // } else {
+    //   // This is use to remove the __v variable in the fields
+    //   query = query.select('-__v');
+    // }
 
-    // 4) Pagination
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 100;
-    const skip = (page - 1) * limit;
-    // page=10&limit=10 <=> query.skip(10).limit(10) <=> 1-10 page1 ; 11-20 page 2; ...
-    query = query.skip(skip).limit(limit);
+    // // 4) Pagination
+    // const page = req.query.page * 1 || 1;
+    // const limit = req.query.limit * 1 || 100;
+    // const skip = (page - 1) * limit;
+    // // page=10&limit=10 <=> query.skip(10).limit(10) <=> 1-10 page1 ; 11-20 page 2; ...
+    // query = query.skip(skip).limit(limit);
 
-    if (req.query.page) {
-      // if number of document that we skiped is greater than
-      // the document alredy exist,that means the page does not exist
-      const numTours = await TourModel.countDocuments();
-      if (skip >= numTours) throw new Error('This page does not exist');
-    }
+    // if (req.query.page) {
+    //   // if number of document that we skiped is greater than
+    //   // the document alredy exist,that means the page does not exist
+    //   const numTours = await TourModel.countDocuments();
+    //   if (skip >= numTours) throw new Error('This page does not exist');
+    // }
 
     // EXECUTE QUERY
-    const tours = await query;
+    // the chaining is work because we use the return this inside
+    // every methode in the APIFeatures class
+    const features = new APIFeatures(TourModel.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const tours = await features.query;
 
     res.status(200).json({
       status: 'succes',
