@@ -167,6 +167,36 @@ exports.getMonthlyPlan = async (req, res) => {
       {
         $unwind: '$startDate',
       },
+      {
+        $match: {
+          startDate: {
+            $gte: new Date(`${year}-01-01`),
+            $lte: new Date(`${year}-12-01`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: '$startDate' },
+          numTourStart: { $sum: 1 },
+          tours: { $push: '$name' },
+        },
+      },
+      {
+        $addFields: { month: '$_id' },
+      },
+      {
+        // project is use to hide the filed ex _id :0 => hide _id,
+        // _id : 1 <=> show _id
+        $project: { _id: 0 },
+      },
+      {
+        $sort: { numTourStart: -1 },
+      },
+      {
+        // to limit the number of respons
+        $limit: 12,
+      },
     ]);
     res.status(200).json({
       status: 'succes',
