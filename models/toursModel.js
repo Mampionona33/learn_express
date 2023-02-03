@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // create a basic tour schema
 // Schema is used to validate data
 const tourSchema = new mongoose.Schema({
+  _id: { type: String },
   name: { type: String, required: [true, 'Name is required'], unique: true },
   duration: { type: Number, required: [true, 'Duration is required'] },
   description: { type: String, required: [true, 'Description is required'] },
