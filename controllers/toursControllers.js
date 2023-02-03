@@ -154,3 +154,28 @@ exports.getTourStats = async (req, res) => {
     });
   }
 };
+
+exports.getMonthlyPlan = async (req, res) => {
+  try {
+    /* 
+    $unwind : Deconstructs an array field from the input documents to output 
+    a document for each element. Each output document is the input 
+    document with the value of the array field replaced by the element.
+    */
+    const year = req.params.year * 1;
+    const plan = await TourModel.aggregate([
+      {
+        $unwind: '$startDate',
+      },
+    ]);
+    res.status(200).json({
+      status: 'succes',
+      data: { plan },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'failed',
+      message: error,
+    });
+  }
+};

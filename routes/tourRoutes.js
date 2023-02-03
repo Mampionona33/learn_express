@@ -7,6 +7,7 @@ const {
   updateTour,
   aliasTopTours,
   getTourStats,
+  getMonthlyPlan,
 } = require('../controllers/toursControllers');
 
 const router = express.Router();
@@ -23,6 +24,9 @@ const router = express.Router();
 router.route('/top-5-cheaps').get(aliasTopTours, getTours);
 
 router.route('/tour-stats').get(getTourStats);
+
+// Pipline unwinding and projecting
+router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
 router.route('/').get(getTours).post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);

@@ -10,6 +10,12 @@ GET http://localhost:3000/api/v1/tours/?imageCover=Image 1&page=2 HTTP/1.1
 GET http://localhost:3000/api/v1/tours?page=2&limit=2 HTTP/1.1
 ###
 
+
+# Get monthly plan
+GET http://localhost:3000/api/v1/tours/monthly-plan/2021 HTTP/1.1
+###
+
+
 # Get tour stats request
 GET http://localhost:3000/api/v1/tours/tour-stats HTTP/1.1
 ###
