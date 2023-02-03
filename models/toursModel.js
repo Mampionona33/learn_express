@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-
+const slugify = require('slugify');
 // create a basic tour schema
 // Schema is used to validate data
 const tourSchema = new mongoose.Schema(
   {
     // _id: { type: String },
+    slug: { type: String },
     name: { type: String, required: [true, 'Name is required'], unique: true },
     duration: { type: Number, required: [true, 'Duration is required'] },
     description: { type: String, required: [true, 'Description is required'] },
@@ -38,9 +39,32 @@ const tourSchema = new mongoose.Schema(
   6/ the virtual proprety can'not be used in a query proprety
   because they are not part of database. So we can'not say 
   for example tourModel.find($eq:{durationWeeks : 7})
+  7/ Virtual propreties are defined on the schema
  */
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
+});
+
+/* 
+  1/ pre() midleware is runing before an actual event
+  2/ the event in this case is the save() event and .create() commande
+  3/ the callback function is callde before teh document is saved to the db
+  4/ the pre() will not run on .insertMany() or findbyIdAndUpdate
+  it will only run on save
+*/
+
+// DOCUMENT MIDDLEWARE
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+/* 
+ 1/ post() middleware is runing after the save event is trigged
+*/
+tourSchema.post('save', (doc, next) => {
+  console.log(`Will save document : ${doc}`);
+  next();
 });
 
 // create a basic tour model
