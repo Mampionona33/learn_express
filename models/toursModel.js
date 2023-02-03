@@ -73,11 +73,23 @@ tourSchema.post('save', (doc, next) => {
   1/ Query middleware allow us to run function before or after a query is executed
   2/ The this is pointing to the query
   3/ the middleware bellow is used to show tours thas secretTour is Not Equal to true
-*/
-tourSchema.pre('find', function (next) {
+  3/ It'is not best practice to make a copy paste from the find
+  to create the findOne query. Insted we should use
+  regular expression. So we comment the findOne but not
+  remove it to set it as reference.
+  4/ The regular expresion below is use to make run the
+  query middleware in every request that start with find : 
+  find or findOne
+  */
+tourSchema.pre(/^find/, function (next) {
   this.find({ sectretTour: { $ne: true } });
   next();
 });
+
+// tourSchema.pre('findOne', function (next) {
+//   this.find({ sectretTour: { $ne: true } });
+//   next();
+// });
 
 // create a basic tour model
 // Use capital letter for the first letter to declaring a model variable
