@@ -79,10 +79,11 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "tour 11",
-    "description": "this is tour 11",
+    "name": "Secrete Tour",
+    "description": "this is secrete tour",
     "duration": 3,
     "imageCover": "Image 4",
-    "price": 2
+    "price": 2,
+    "sectretTour" : true
 }
 ###

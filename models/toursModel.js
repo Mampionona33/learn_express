@@ -16,6 +16,7 @@ const tourSchema = new mongoose.Schema(
     price: { type: Number },
     ratingAverage: { type: Number, default: 0 },
     startDate: { type: [Date] },
+    sectretTour: { type: Boolean, default: false },
   },
   {
     // each time that data is outputed as json or/and as an object
@@ -64,6 +65,17 @@ tourSchema.pre('save', function (next) {
 */
 tourSchema.post('save', (doc, next) => {
   console.log(`Will save document : ${doc}`);
+  next();
+});
+
+// QUERY MIDDLEWARE
+/* 
+  1/ Query middleware allow us to run function before or after a query is executed
+  2/ The this is pointing to the query
+  3/ the middleware bellow is used to show tours thas secretTour is Not Equal to true
+*/
+tourSchema.pre('find', function (next) {
+  this.find({ sectretTour: { $ne: true } });
   next();
 });
 
