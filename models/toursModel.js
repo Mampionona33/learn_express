@@ -91,6 +91,17 @@ tourSchema.pre(/^find/, function (next) {
 //   next();
 // });
 
+// AGREGATION MIDDLEWARE
+/*
+  This middleware is runing before the aggreation is called
+  This is use to remove the secretTour before runing the aggregation
+*/
+tourSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { sectretTour: { $ne: true } } });
+  console.log(this.pipeline());
+  next();
+});
+
 // create a basic tour model
 // Use capital letter for the first letter to declaring a model variable
 const TourModel = mongoose.model('Tour', tourSchema);
