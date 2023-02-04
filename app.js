@@ -48,4 +48,17 @@ const userBasedUrl = '/api/v1/users';
 app.use(toursBasedUrl, tourRouter);
 app.use(userBasedUrl, userRouter);
 
+// Handling unhandling routes
+/* 
+  If the req, res cycle reach this point
+  that means, it pass through previous routes
+*/
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can't find ${req.originalUrl}`,
+  });
+  next();
+});
+
 module.exports = app;
