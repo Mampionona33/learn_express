@@ -79,11 +79,11 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Secrete Tour",
+    "name": "Secrete test dfsfs",
     "description": "this is secrete tour",
     "duration": 3,
     "imageCover": "Image 4",
     "price": 2,
-    "sectretTour" : true
+    "ratingAverage" : 10
 }
 ###

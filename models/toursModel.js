@@ -6,7 +6,13 @@ const tourSchema = new mongoose.Schema(
   {
     // _id: { type: String },
     slug: { type: String },
-    name: { type: String, required: [true, 'Name is required'], unique: true },
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+      unique: true,
+      maxlength: [40, 'A tour name must have less or equal than 40 charatcers'],
+      minlength: [10, 'A tour name must have more or equal than 10 charatcers'],
+    },
     duration: { type: Number, required: [true, 'Duration is required'] },
     description: { type: String, required: [true, 'Description is required'] },
     imageCover: { type: String, required: [true, 'Image cover is required'] },
@@ -14,7 +20,19 @@ const tourSchema = new mongoose.Schema(
     // Setting select propretie to createAt to false to not send it in the response
     createAt: { type: Date, default: Date.now(), select: false },
     price: { type: Number },
-    ratingAverage: { type: Number, default: 0 },
+    ratingAverage: {
+      type: Number,
+      default: 1,
+      min: [1, 'Rating must be above 1.0'],
+      max: [5, 'Rating must be less than 5.0'],
+    },
+    difficculty: {
+      type: String,
+      enum: {
+        values: ['easy', 'medium', 'difficult'],
+        message: 'Difficulty is either : easy, medium, difficult',
+      },
+    },
     startDate: { type: [Date] },
     sectretTour: { type: Boolean, default: false },
   },
