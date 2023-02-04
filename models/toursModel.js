@@ -26,6 +26,18 @@ const tourSchema = new mongoose.Schema(
       min: [1, 'Rating must be above 1.0'],
       max: [5, 'Rating must be less than 5.0'],
     },
+    priceDiscount: {
+      type: Number,
+      validate: {
+        validator: function (val) {
+          // this only point to current doc on NEW document creation
+          // this return true if val < this.price
+          // if the return value is false, the error message is send
+          return val < this.price;
+        },
+        message: 'Discount price ({VALUE}) should be below regular price',
+      },
+    },
     difficculty: {
       type: String,
       enum: {
