@@ -57,13 +57,13 @@ GET http://localhost:3000/api/v1/tours/63d29710bfc87c3f0c7c3d0c HTTP/1.1
 
 # Update tour
 # The id of the tour must be less than 5
-PATCH http://localhost:3000/api/v1/tours/63d279e87177b6250d898f2e HTTP/1.1
+PATCH http://localhost:3000/api/v1/tours/63e09fffebbf8e18480b08b3 HTTP/1.1
 content-type: application/json
 
 {
-    "name" : "tour 001",
-    "description": "This is tour 003",
-    "imageCover" : "Mountain",
+    "name" : "tour test 00001",
+    "description": "This is tour 00001",
+    "imageCover" : "Mountain"
 }
 
 ###
@@ -84,7 +84,7 @@ content-type: application/json
     "duration": 3,
     "imageCover": "Image 4",
     "price": 2,
-    "priceDiscount" : 50,
+    "priceDiscount" : 1,
     "ratingAverage" : 4
 }
 ###
