@@ -77,6 +77,9 @@ exports.updateTour = async (req, res) => {
 };
 
 const catchAsync = (fn) => {
+  /*
+    At this point req, res, next are passed to the catchAsync func 
+  */
   fn(req, res, next).catch((err) => next(err));
 };
 
