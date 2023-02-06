@@ -1,6 +1,7 @@
 const TourModel = require('../models/toursModel');
 const APIFeatures = require('../utiles/apiFeatures');
 const catchAsync = require('../utiles/catchAsync');
+const AppError = require('../utiles/appError');
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -28,7 +29,7 @@ exports.getTours = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTour = catchAsync(async (req, res) => {
+exports.getTour = catchAsync(async (req, res, next) => {
   /* 
     the the req.params.id is the id from the tourRoutes
     router.route('/:id').get(getTour)
@@ -37,17 +38,26 @@ exports.getTour = catchAsync(async (req, res) => {
     but we have findById in mongoose whitch is more simple and accurate
   */
   const tour = await TourModel.findById(req.params.id);
+
+  if (!tour) {
+    return next(new AppError('No tour found with taht ID', 404));
+  }
   res.status(200).json({
     status: 'succes',
     data: { tour },
   });
 });
 
-exports.updateTour = catchAsync(async (req, res) => {
+exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await TourModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
+  if (!tour) {
+    return next(new AppError('No tour found with taht ID', 404));
+  }
+
   res.status(200).json({
     status: 'succes',
     result: tour.length,
@@ -65,8 +75,11 @@ exports.createTour = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteTour = catchAsync(async (req, res) => {
+exports.deleteTour = catchAsync(async (req, res, next) => {
   const tour = await TourModel.findByIdAndDelete(req.params.id, req.body);
+  if (!tour) {
+    return next(new AppError('No tour found with taht ID', 404));
+  }
   res.status(204).json({
     status: 'succes',
     result: tour.length,
