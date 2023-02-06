@@ -39,7 +39,6 @@ exports.getTour = catchAsync(async (req, res) => {
   const tour = await TourModel.findById(req.params.id);
   res.status(200).json({
     status: 'succes',
-    result: tour.length,
     data: { tour },
   });
 });
