@@ -2,12 +2,12 @@ const TourModel = require('../models/toursModel');
 const APIFeatures = require('../utiles/apiFeatures');
 const catchAsync = require('../utiles/catchAsync');
 
-exports.aliasTopTours = catchAsync(async (req, res, next) => {
+exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
   req.query.sort = '-ratingAverage.price';
   req.query.fields = 'name.price.ratingAverage.duration';
   next();
-});
+};
 
 exports.getTours = catchAsync(async (req, res) => {
   // EXECUTE QUERY
