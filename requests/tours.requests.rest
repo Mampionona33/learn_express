@@ -84,12 +84,12 @@ POST http://localhost:3000/api/v1/tours HTTP/1.1
 content-type: application/json
 
 {
-    "name": "test tour 1",
+    "name": "test",
     "description": "this is secrete tour",
     "duration": 3,
     "imageCover": "Image 4",
     "price": 2,
     "priceDiscount" : 1,
-    "ratingAverage" : 4
+    "ratingAverage" : 10
 }
 ###
