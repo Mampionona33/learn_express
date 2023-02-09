@@ -1,6 +1,15 @@
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+
+// Put the uncaughtException at the top of the app
+// Before all the app start to catch all error
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! Shutting down...');
+  console.log(err);
+  process.exit(1);
+});
+
 const app = require('./app');
 
 /*
@@ -40,6 +49,7 @@ const server = app.listen(PORT, () =>
   console.log(`Server start on port ${PORT}`)
 );
 
+// it use to handle error like db auth
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
   console.log('UNHANDLER REJECTION! Shutting down...');
