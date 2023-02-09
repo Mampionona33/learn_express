@@ -1,3 +1,5 @@
+const AppErro = require('../utiles/appError');
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -26,13 +28,26 @@ const sendErrorProduction = (err, res) => {
   }
 };
 
-module.exports = (err, req, res) => {
+const handleCastErrorDB = (err) => {
+  const message = `Invalid ${err.path}: ${err.value}`;
+  return new AppErro(message, 400);
+};
+
+module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    sendErrorProduction(err, res);
+    // do not use let error = {...err}; to make a copy of the erro
+    // because it will not copy the name
+    let error = { ...err, name: err.name };
+
+    // Handling _id error
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
+
+    sendErrorProduction(error, res);
   }
+  next();
 };

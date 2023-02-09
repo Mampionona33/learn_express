@@ -3,7 +3,7 @@ GET http://localhost:3000/api/v1/tours HTTP/1.1
 ###
 
 # Get tour by id
-GET http://localhost:3000/api/v1/tours/63e0a4ec102ba6f13d4e7595 HTTP/1.1
+GET http://localhost:3000/api/v1/tours/fsdfsdfsfsdfsqf546 HTTP/1.1
 ###
 
 #   Get request all tours with filtre
@@ -67,7 +67,8 @@ content-type: application/json
 {
     "name" : "tour test 00001",
     "description": "This is tour 00001",
-    "imageCover" : "Mountain"
+    "imageCover" : "Mountain",
+    "ratingAverage":10
 }
 
 ###
