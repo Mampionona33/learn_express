@@ -1,18 +1,24 @@
-const fs = require('fs');
+const userModel = require('../models/userModel');
+const APIFeatures = require('../utiles/apiFeatures');
+const catchAsync = require('../utiles/catchAsync');
+const AppError = require('../utiles/appError')
 
+const fs = require('fs');
 // Read data from local data base
 const dbPath = `${__dirname}/../dev-data/data/users-simple.json`;
 const users = JSON.parse(fs.readFileSync(`${dbPath}`));
 
 // --------------users controlers -------------------
-exports.getUsers = (req, res) => {
+exports.getUsers = catchAsync( async(req, res, next) => {
+  const users = await userModel.find();
+
+
   res.status(200).json({
     status: 'succes',
-    'requested at': req.requestTime,
     result: users.length,
     data: { users: users },
   });
-};
+});
 
 exports.createUser = (req, res) => {
   /* 

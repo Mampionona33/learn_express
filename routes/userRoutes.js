@@ -11,6 +11,7 @@ const authController = require('../controllers/authController')
 // const userRouter = express.Router();
 const router = express.Router();
 router.post('/signup', authController.signup);
+router.post('/login', authController.login);
 
 router.route('/').get(getUsers).post(createUser);
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);

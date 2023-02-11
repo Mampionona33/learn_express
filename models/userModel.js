@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: [true, 'password is required'],
     minLength: 8,
+    // use select : false to hide the field in every request
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -46,6 +48,24 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+/* 
+  Create an instance statics methode which will be available in all
+  all the document on the certain collection.
+  Because of password select is set to fals, so the this.password
+  will not be availabel. For that we pass the userPassword as parameter of this function
+  wich will be used on authController to check if the incomming password is the same as
+  the user encrypted password.
+
+  the system is tha we encrypted the incomming password and compare it to the 
+  user password frome data base wich is encrypted on it's creation.
+  If thei are the same, so the function will return true.
+*/
+userSchema.statics.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 // Model variable must start with upercase by convention
 const UserModel = mongoose.model('Users', userSchema);
 module.exports = UserModel;
