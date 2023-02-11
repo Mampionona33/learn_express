@@ -21,8 +21,8 @@ POST http://localhost:3000/api/v1/users/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "BEMA",
-    "email": "tomady@gmail.com",
+    "name": "BEMA_1",
+    "email": "tomady_be@gmail.com",
     "password": "12345678",
     "passwordConfirm": "12345678"
 }
