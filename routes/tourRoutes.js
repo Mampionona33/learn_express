@@ -9,6 +9,7 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = require('../controllers/toursControllers');
+const { protect } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.route('/tour-stats').get(getTourStats);
 // Pipline unwinding and projecting
 router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
-router.route('/').get(getTours).post(createTour);
+router.route('/').get(protect, getTours).post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
 module.exports = router;
