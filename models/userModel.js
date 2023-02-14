@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
+  passwordChangeAt: { type: Date },
   password: {
     type: String,
     require: [true, 'password is required'],
@@ -66,6 +67,20 @@ userSchema.statics.correctPassword = async function (
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
+
+// test if user has changed his password
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangeAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangeAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  // false mean that password is NOT changed
+  return false;
+};
+
 // Model variable must start with upercase by convention
 const UserModel = mongoose.model('Users', userSchema);
 module.exports = UserModel;
