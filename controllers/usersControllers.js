@@ -9,9 +9,8 @@ const dbPath = `${__dirname}/../dev-data/data/users-simple.json`;
 const users = JSON.parse(fs.readFileSync(`${dbPath}`));
 
 // --------------users controlers -------------------
-exports.getUsers = catchAsync(async (req, res, next) => {
-  const users = await userModel.find();
-
+exports.getUsers = catchAsync(async (req, res) => {
+  // const users = await userModel.find();
   res.status(200).json({
     status: 'succes',
     result: users.length,
@@ -25,7 +24,6 @@ exports.createUser = (req, res) => {
       but in this facke data , we will create a id
     */
   const newId = users[users.length - 1]._id + 1;
-  console.log(newId);
   const newUser = ({ _id: newId }, req.body);
   console.log(newUser);
   users.push(newUser);

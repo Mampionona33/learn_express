@@ -21,11 +21,11 @@ POST http://localhost:3000/api/v1/users/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "BEMA_rivo",
-    "email": "bemarivo@gmail.com",
+    "name": "BEMA_rivo_admin",
+    "email": "bemarivo_admin@gmail.com",
     "password": "12345678",
     "passwordConfirm": "12345678",
-    "passwordChangeAt": "2023-01-15"
+    "role":"admin"
 }
 ###
 
