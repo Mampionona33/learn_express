@@ -1,7 +1,7 @@
 const TourModel = require('../models/toursModel');
-const APIFeatures = require('../utiles/apiFeatures');
-const catchAsync = require('../utiles/catchAsync');
-const AppError = require('../utiles/appError');
+const APIFeatures = require('../assets/apiFeatures');
+const catchAsync = require('../assets/catchAsync');
+const AppError = require('../assets/appError');
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';

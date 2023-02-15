@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 const dotenv = require('dotenv');
-const AppErro = require('./utiles/appError');
+const AppErro = require('./assets/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');

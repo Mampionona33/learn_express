@@ -1,7 +1,7 @@
 const userModel = require('../models/userModel');
-const APIFeatures = require('../utiles/apiFeatures');
-const catchAsync = require('../utiles/catchAsync');
-const AppError = require('../utiles/appError');
+const APIFeatures = require('../assets/apiFeatures');
+const catchAsync = require('../assets/catchAsync');
+const AppError = require('../assets/appError');
 
 const fs = require('fs');
 // Read data from local data base
