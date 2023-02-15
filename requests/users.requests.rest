@@ -15,6 +15,17 @@ Content-Type: application/json
 }
 
 ###
+# Forgot Password
+POST http://localhost:3000/api/v1/users/forgotPassword HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "BEMA",
+    "lasteName": "Zirika",
+    "email": "bemarivo@gmail.com"
+}
+
+###
 
 # Signup requeste
 POST http://localhost:3000/api/v1/users/signup HTTP/1.1
