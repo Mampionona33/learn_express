@@ -1,6 +1,6 @@
 # Get request get all tours
 GET http://localhost:3000/api/v1/tours HTTP/1.1
-Authorization: Bearer teyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWIyOWVlOWNlN2U1NjNmODBhYjNmMyIsImlhdCI6MTY3NjM1NjA3OCwiZXhwIjoxNjg0MTMyMDc4fQ.elKniOutpBE9C2J3zDgUcm-e0WYhI9hvxYoaWhhddJ0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI1MzgxMDgwZWRlNDEwYzY3NGQ4MiIsImlhdCI6MTY3NjUzOTMyNywiZXhwIjoxNjg0MzE1MzI3fQ.jaPdcC75zY_utbZoAIiNTnD5iYl8vio_Mokxi7XGObs
 
 ###
 

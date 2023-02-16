@@ -57,6 +57,13 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  // substract by 1000 to make it to the past
+  this.passwordChangeAt = Date.now() - 1000;
+  next();
+});
+
 /* 
   Create an instance statics methode which will be available in all
   all the document on the certain collection.

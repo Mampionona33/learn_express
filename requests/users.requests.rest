@@ -28,11 +28,12 @@ Content-Type: application/json
 ###
 
 # Reset password
-PATCH http://localhost:3000/api/v1/users/resetPassword/454545 HTTP/1.1
+PATCH http://localhost:3000/api/v1/users/resetPassword/446762c305ea308a3dd31ffb2be95ea8ca92cf262f192d6013963002df7b5e20 HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "ramamps33@gmail.com"
+    "password":"newpass3",
+    "passwordConfirm":"newpass3"
 }
 
 ###
