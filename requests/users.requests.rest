@@ -22,7 +22,17 @@ Content-Type: application/json
 {
     "name": "BEMA",
     "lasteName": "Zirika",
-    "email": "bemarivo@gmail.com"
+    "email": "ramamps33@gmail.com"
+}
+
+###
+
+# Reset password
+PATCH http://localhost:3000/api/v1/users/resetPassword/454545 HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "ramamps33@gmail.com"
 }
 
 ###

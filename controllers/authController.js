@@ -4,6 +4,8 @@ const User = require('../models/userModel');
 const catchAsync = require('../assets/catchAsync');
 const AppError = require('../assets/appError');
 const UserModel = require('../models/userModel');
+const sendEmail = require('../assets/email');
+const { token } = require('morgan');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -116,5 +118,31 @@ exports.forgoPassword = catchAsync(async (req, res, next) => {
   //  validateBeforeSave: false is use to desactivate all validators in the schema
   await user.save({ validateBeforeSave: false });
   // 3) Send it to user's email
+  const resetUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/api/v1/susers/resetPassword/${resetToken}`;
+
+  const message = `Forgot your password ? Submit a PATCH request with your new password and
+  passwordConfirm to : ${resetUrl}.\nIf  you didn't forget your password, please ignore this email!`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Your password reset token (vaid for 10min)',
+      message,
+    });
+    res.status(200).json({
+      status: 'sucess',
+      message: 'Token sent to email',
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(
+      new AppError('There was an error sending the email. Tryagain later!'),
+      500
+    );
+  }
 });
 exports.resetPassword = catchAsync(async (req, res, next) => {});
