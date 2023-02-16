@@ -38,6 +38,19 @@ Content-Type: application/json
 
 ###
 
+# Update loged user password
+PATCH http://localhost:3000/api/v1/users/updateMyPassword HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI1MzgxMDgwZWRlNDEwYzY3NGQ4MiIsImlhdCI6MTY3NjU0MjcxNiwiZXhwIjoxNjg0MzE4NzE2fQ.3C4o4zwkmvqWR5Hnf5BJbsGlIaDGn8xvHbu3nVrKP10
+
+{
+    "passwordCurrent":"newpass3",
+    "password":"newpass5",
+    "passwordConfirm":"newpass5"
+}
+
+###
+
 # Signup requeste
 POST http://localhost:3000/api/v1/users/signup HTTP/1.1
 Content-Type: application/json
@@ -57,8 +70,8 @@ Content-Type: application/json
 
 {
     "name": "BEMA_rivo",
-    "email": "bemarivo@gmail.com",
-    "password": "12345678"
+    "email": "ramamps33@gmail.com",
+    "password": "newpass3"
 }
 ###
 

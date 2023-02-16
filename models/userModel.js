@@ -76,7 +76,7 @@ userSchema.pre('save', async function (next) {
   user password frome data base wich is encrypted on it's creation.
   If thei are the same, so the function will return true.
 */
-userSchema.statics.correctPassword = async function (
+userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
