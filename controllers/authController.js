@@ -37,6 +37,9 @@ const createSendToken = (user, statusCode, res) => {
   // Sending cookies
   res.cookie('jwt', token, cookiesOptions);
 
+  // Hide password on sended respons
+  user.password = undefined;
+
   res.status(statusCode).json({
     status: 'success',
     token,
