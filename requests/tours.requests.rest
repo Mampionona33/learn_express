@@ -77,7 +77,9 @@ content-type: application/json
 
 # Delete tour
 # The id of the tour must be less than 5
-DELETE http://localhost:3000/api/v1/tours/63d29710bfc87c3f0c7c3d0c HTTP/1.1
+DELETE http://localhost:3000/api/v1/tours/63dcfc9b1957769d2ccb3707 HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI1NjE4ZWI4NGRlOWVhOTJiZTNhYSIsImlhdCI6MTY3NjgzMjY2NiwiZXhwIjoxNjg0NjA4NjY2fQ.7S3OW4Wcm56aleDF9GekBb_NWK1zCuQYiBqG1yJw7D0
 
 ###
 

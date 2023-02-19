@@ -9,7 +9,7 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = require('../controllers/toursControllers');
-const { protect } = require('../controllers/authController');
+const { protect, restrictedTo } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -30,6 +30,13 @@ router.route('/tour-stats').get(getTourStats);
 router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
 router.route('/').get(protect, getTours).post(createTour);
-router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
+
+router
+  .route('/:id')
+  .get(getTour)
+  .patch(updateTour)
+  // User must be authentificated and have admin or lead-guide roles
+  // to perfome a tour delete action
+  .delete(protect, restrictedTo('admin', 'lead-guide'), deleteTour);
 
 module.exports = router;
