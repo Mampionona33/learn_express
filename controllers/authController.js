@@ -15,20 +15,27 @@ const signToken = (id) =>
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
 
-  // Sending cookies
-  res.cookies('jwt', token, {
+  const cookiesOptions = {
     // convert day to millisecond = 90 days * 24 hours * 60 min * 60 sec * 1000 milsec
     expires: new Date(
       Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
+
     // only send cookies on only encripted connection = https
-    secure: true,
+    // secure: true,
+
     // The cookies can note be access or modified by the browser any way
     // For preventing the cross side scripting attack
     // The cookies is receved by the browser and then stored, it will automaticly
     // resent in every request
     httpOnly: true,
-  });
+  };
+
+  // Only set secure to true on production
+  if (process.env.NODE_ENV === 'production') cookiesOptions.secure = true;
+
+  // Sending cookies
+  res.cookie('jwt', token, cookiesOptions);
 
   res.status(statusCode).json({
     status: 'success',
