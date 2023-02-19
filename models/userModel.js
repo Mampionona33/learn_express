@@ -41,6 +41,19 @@ const userSchema = new mongoose.Schema({
   photo: { type: String },
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: { type: Boolean, default: true, select: false },
+});
+
+/* 
+  Filter all document to show only filde withe active true
+  use the regular expression /^find/ to execute the 
+  middleware on all quer that start with find like findOneAndUpdate, findOne, ...
+  the this point to the current query
+*/
+userSchema.pre(/^find/, function (next) {
+  // $ne means : not equal to
+  this.find({ active: { $ne: false } });
+  next();
 });
 
 /* 

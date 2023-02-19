@@ -19,7 +19,7 @@ const filtredObj = (obj, ...allowedFields) => {
 
 // --------------users controlers -------------------
 exports.getUsers = catchAsync(async (req, res) => {
-  // const users = await userModel.find();
+  const users = await userModel.find();
   res.status(200).json({
     status: 'succes',
     result: users.length,
@@ -73,6 +73,20 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: { user: updatedUser },
+  });
+});
+
+// To handle request user request delete account
+/* 
+  Use this methode to not delete the user from database
+  set it only to inactive so for the past the user can 
+  reactive it
+*/
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await UserModel.findByIdAndUpdate(req.user.id, { active: false });
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });
 
