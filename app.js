@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const AppErro = require('./assets/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const userRouter = require('./routes/userRoutes');
 
 dotenv.config({ path: './.env' });
@@ -38,6 +40,32 @@ app.use('/api', limiter);
 // expres.json() is a middleware to modify the incomming request
 // If we do not use it, so the data from the methode post will be undefined
 app.use(express.json({ limit: '10kb' }));
+
+// DATA SANITIZATION
+
+/* 
+  Data sanitization is methode to clear all maliciouse code from
+  client request.
+*/
+// 1) Data sanitizaion against NoSQL query injection
+/*
+  for exemple, if the attacker send a request 
+  it will be work beceause the condition {"$gt":""} is always true
+  {
+    "email" :{"$gt":""},
+    "password":"pass1234"
+  }
+  then he will be able to connect as an admin
+  mongoSanitize() will remove all : "$,." <=> remove all mongodb operators
+*/
+app.use(mongoSanitize());
+
+// 2) Data sanitizaion against XSS
+/* 
+  Protect against html code injection
+  xss() will convert all html code injection 
+*/
+app.use(xss());
 
 // serving static file frome server
 app.get('/overview.html', (req, res) => {
