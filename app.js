@@ -10,6 +10,7 @@ const tourRouter = require('./routes/tourRoutes');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const userRouter = require('./routes/userRoutes');
+const hpp = require('hpp');
 
 dotenv.config({ path: './.env' });
 
@@ -66,6 +67,23 @@ app.use(mongoSanitize());
   xss() will convert all html code injection 
 */
 app.use(xss());
+
+// 3) Prevent parameter pollution
+/* 
+  Remove duplicate params to prevent array creation filter
+*/
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'ratingAverage',
+      'maxGroupSize',
+      'difficulty',
+      'price',
+    ],
+  })
+);
 
 // serving static file frome server
 app.get('/overview.html', (req, res) => {
